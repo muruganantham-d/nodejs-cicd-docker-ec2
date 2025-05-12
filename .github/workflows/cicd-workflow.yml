@@ -2,7 +2,7 @@ name: CICD
 
 on:
   push:
-    branches: [nodejs]
+    branches: [nodejs-app]
 
 jobs:
   build:
@@ -15,15 +15,8 @@ jobs:
       - name: Build docker image
         run: docker build -t muruganantham-d/nodejs-cicd-docker-ec2 .
       - name: Publish image to docker hub
-        run: docker push integrationninjas/nodejs-app:latest
+        run: docker push muruganantham-d/nodejs-cicd-docker-ec2:latest
         
   deploy:
     needs: build
-    runs-on: [aws-ec2]
-    steps:
-      - name: Pull image from docker hub
-        run: docker pull integrationninjas/nodejs-app:latest
-      - name: Delete old container
-        run: docker rm -f nodejs-app-container
-      - name: Run docker container
-        run: docker run -d -p 5000:5000 --name nodejs-app-container integrationninjas/nodejs-app
+    runs-on: []
