@@ -24,6 +24,6 @@ jobs:
       - name: Pull image from docker hub 
         run: docker pull muruganantham-d/nodejs-cicd-docker-ec2:latest
       - name: Delete old container
-        run: docker rm -f nodejs-app-container
+        run: docker rm -f nodejs-cicd-docker-ec2-container
       - name: Run docker container
-        run: docker run -d -p 5000:5000 -name nodejs-app-container muruganantham-d/nodejs-cicd-docker-ec2
+        run: docker run -d -p 5000:5000 -name nodejs-cicd-docker-ec2-container muruganantham-d/nodejs-cicd-docker-ec2
