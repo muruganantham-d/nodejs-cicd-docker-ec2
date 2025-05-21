@@ -13,17 +13,17 @@ jobs:
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }} 
       - name: Build docker image
-        run: docker build -t muruganantham-d/nodejs-cicd-docker-ec2 .
+        run: docker build -t murugan2025/nodejs-cicd-docker-ec2 .
       - name: Publish image to docker hub
-        run: docker push muruganantham-d/nodejs-cicd-docker-ec2:latest
+        run: docker push murugan2025/nodejs-cicd-docker-ec2:latest
         
   deploy:
     needs: build
-    runs-on: [aws-ec2]
+    runs-on: [self-hosted, aws-ec2]
     steps:
       - name: Pull image from docker hub 
-        run: docker pull muruganantham-d/nodejs-cicd-docker-ec2:latest
+        run: docker pull murugan2025/nodejs-cicd-docker-ec2:latest
       - name: Delete old container
         run: docker rm -f nodejs-cicd-docker-ec2-container
       - name: Run docker container
-        run: docker run -d -p 5000:5000 -name nodejs-cicd-docker-ec2-container muruganantham-d/nodejs-cicd-docker-ec2
+        run: docker run -d -p 5000:5000 -name nodejs-cicd-docker-ec2-container murugan2025/nodejs-cicd-docker-ec2
